@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fmb/utils/dimensions.dart';
 import 'package:fmb/widgets/app_column.dart';
 import 'package:fmb/widgets/app_icon.dart';
+import 'package:fmb/widgets/expandable_text.dart';
 
 import '../../utils/colors.dart';
 import '../../widgets/big_text.dart';
@@ -18,6 +19,7 @@ class PopularFoodDetail extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
+          //background image
           Positioned(
             left: 0,
             right: 0,
@@ -32,6 +34,7 @@ class PopularFoodDetail extends StatelessWidget {
               ),
             ),
           ),
+          //icons
           Positioned(
             left: 20,
             right: 20,
@@ -44,6 +47,7 @@ class PopularFoodDetail extends StatelessWidget {
               ],
             ),
           ),
+          //indroduction to food
           Positioned(
             left: 0,
             right: 0,
@@ -69,6 +73,9 @@ class PopularFoodDetail extends StatelessWidget {
                     height: Dimensions.height20,
                   ),
                   BigText(text: 'Introduce'),
+                  ExpandableText(
+                      text:
+                          'khsdjdkhkj skjfljlksj lskdlklkl skjlkjlkejlk skjlljlkjs ldjljlkjr jlrjljkl kjlklkjr kllkjr')
                 ],
               ),
             ),
