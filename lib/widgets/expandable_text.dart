@@ -16,7 +16,7 @@ class _ExpandableTextState extends State<ExpandableText> {
   late String secondHalf;
 
   bool hiddenText = true;
-  double textHeight = Dimensions.screenHeight / 5.60;
+  double textHeight = Dimensions.screenHeight / 5.83;
   @override
   void initState() {
     // TODO: implement initState
@@ -34,16 +34,28 @@ class _ExpandableTextState extends State<ExpandableText> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: secondHalf.isNotEmpty
-          ? SmallText(text: firstHalf)
+      child: secondHalf.isEmpty
+          ? SmallText(
+              color: AppColors.paraColor,
+              text: firstHalf,
+              size: Dimensions.font16,
+            )
           : Column(
               children: [
                 SmallText(
-                    text: hiddenText
-                        ? (firstHalf + '...')
-                        : (firstHalf + secondHalf)),
+                  height: 1.8,
+                  color: AppColors.paraColor,
+                  text: hiddenText
+                      ? (firstHalf + '...')
+                      : (firstHalf + secondHalf),
+                  size: Dimensions.font16,
+                ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    setState(() {
+                      hiddenText = !hiddenText;
+                    });
+                  },
                   child: Row(
                     children: [
                       SmallText(
@@ -51,7 +63,9 @@ class _ExpandableTextState extends State<ExpandableText> {
                         color: AppColors.mainColor,
                       ),
                       Icon(
-                        Icons.arrow_drop_down,
+                        hiddenText
+                            ? Icons.arrow_drop_down
+                            : Icons.arrow_drop_up,
                         color: AppColors.mainColor,
                       ),
                     ],

@@ -7,8 +7,6 @@ import 'package:fmb/widgets/expandable_text.dart';
 
 import '../../utils/colors.dart';
 import '../../widgets/big_text.dart';
-import '../../widgets/icon_text_widget.dart';
-import '../../widgets/small_text.dart';
 
 class PopularFoodDetail extends StatelessWidget {
   const PopularFoodDetail({Key? key}) : super(key: key);
@@ -47,7 +45,7 @@ class PopularFoodDetail extends StatelessWidget {
               ],
             ),
           ),
-          //indroduction to food
+          //introduction to food
           Positioned(
             left: 0,
             right: 0,
@@ -73,9 +71,16 @@ class PopularFoodDetail extends StatelessWidget {
                     height: Dimensions.height20,
                   ),
                   BigText(text: 'Introduce'),
-                  ExpandableText(
-                      text:
-                          'khsdjdkhkj skjfljlksj lskdlklkl skjlkjlkejlk skjlljlkjs ldjljlkjr jlrjljkl kjlklkjr kllkjr')
+                  SizedBox(
+                    height: Dimensions.height20,
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: ExpandableText(
+                          text:
+                              'mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmkdffsd uhjljjoiffdhfjhg ddfhlkjklm, msestrytyhijlmm,,mn,nmbmnbbnvnvcbvcvcb'),
+                    ),
+                  )
                 ],
               ),
             ),
