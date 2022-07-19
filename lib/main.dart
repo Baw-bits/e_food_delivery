@@ -3,8 +3,11 @@ import 'package:fmb/pages/food/popular_food_detail.dart';
 import 'package:fmb/pages/food/recommended_food_detail.dart';
 import 'package:fmb/pages/home/main_food_page.dart';
 import 'package:get/get.dart';
+import 'package:fmb/helper/dependencies.dart' as dep;
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dep.init();
   runApp(const MyApp());
 }
 
