@@ -48,16 +48,20 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       children: [
         //Slider Section
         GetBuilder<PopularProductController>(builder: (popularProducts) {
-          return Container(
-            height: Dimensions.pageView,
-            child: PageView.builder(
-                controller: pageController,
-                itemCount: popularProducts.popularProductList.length,
-                itemBuilder: (context, position) {
-                  return _buildPageItem(
-                      position, popularProducts.popularProductList[position]);
-                }),
-          );
+          return popularProducts.isLoaded
+              ? Container(
+                  height: Dimensions.pageView,
+                  child: PageView.builder(
+                      controller: pageController,
+                      itemCount: popularProducts.popularProductList.length,
+                      itemBuilder: (context, position) {
+                        return _buildPageItem(position,
+                            popularProducts.popularProductList[position]);
+                      }),
+                )
+              : CircularProgressIndicator(
+                  color: AppColors.mainColor,
+                );
         }),
         //Dots
         GetBuilder<PopularProductController>(builder: (popularProducts) {
