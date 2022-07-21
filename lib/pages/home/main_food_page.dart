@@ -5,17 +5,16 @@ import 'package:fmb/utils/dimensions.dart';
 import 'package:fmb/widgets/big_text.dart';
 import 'package:fmb/widgets/small_text.dart';
 
-class MainFashionPage extends StatefulWidget {
-  const MainFashionPage({Key? key}) : super(key: key);
+class MainFoodPage extends StatefulWidget {
+  const MainFoodPage({Key? key}) : super(key: key);
 
   @override
-  _MainFashionPageState createState() => _MainFashionPageState();
+  _MainFoodPageState createState() => _MainFoodPageState();
 }
 
-class _MainFashionPageState extends State<MainFashionPage> {
+class _MainFoodPageState extends State<MainFoodPage> {
   @override
   Widget build(BuildContext context) {
-    print('height: ' + MediaQuery.of(context).size.width.toString());
     return Scaffold(
       body: Column(
         children: [
