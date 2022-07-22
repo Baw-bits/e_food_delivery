@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fmb/controllers/popular_product_controller.dart';
+import 'package:fmb/controllers/recommended_product_controller.dart';
 import 'package:fmb/modules/popular_product_model.dart';
 import 'package:fmb/utils/app_constants.dart';
 import 'package:fmb/utils/colors.dart';
@@ -114,85 +115,88 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           ),
         ),
         //List of foods and images
-        ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.only(
-                    left: Dimensions.width20,
-                    right: Dimensions.width20,
-                    bottom: Dimensions.height10),
-                child: Row(
-                  children: [
-                    //image section
-                    Container(
-                      width: Dimensions.listViewImgSize,
-                      height: Dimensions.listViewImgSize,
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radius20),
-                        color: Colors.white38,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage('assets/image/food0.png'),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: Dimensions.listViewTextSize,
+        GetBuilder<RecommendedProductController>(
+            builder: (recommendedProducts) {
+          return ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: recommendedProducts.recommendedProductList.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.only(
+                      left: Dimensions.width20,
+                      right: Dimensions.width20,
+                      bottom: Dimensions.height10),
+                  child: Row(
+                    children: [
+                      //image section
+                      Container(
+                        width: Dimensions.listViewImgSize,
+                        height: Dimensions.listViewImgSize,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(Dimensions.radius20),
-                            bottomRight: Radius.circular(Dimensions.radius20),
-                          ),
-                          color: Colors.white30,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              left: Dimensions.width10,
-                              right: Dimensions.width10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              BigText(text: 'Nutrition fruit meal in china'),
-                              SizedBox(
-                                height: Dimensions.height10,
-                              ),
-                              SmallText(text: 'With chinese characteristics'),
-                              SizedBox(
-                                height: Dimensions.height10,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  IconTextWidget(
-                                      icon: Icons.circle_sharp,
-                                      text: 'Normal',
-                                      iconColor: AppColors.iconColor1),
-                                  IconTextWidget(
-                                      icon: Icons.location_on,
-                                      text: '1.7km',
-                                      iconColor: AppColors.mainColor),
-                                  IconTextWidget(
-                                      icon: Icons.access_time_rounded,
-                                      text: '32min',
-                                      iconColor: AppColors.iconColor2)
-                                ],
-                              ),
-                            ],
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius20),
+                          color: Colors.white38,
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage('assets/image/food0.png'),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            }),
+                      Expanded(
+                        child: Container(
+                          height: Dimensions.listViewTextSize,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(Dimensions.radius20),
+                              bottomRight: Radius.circular(Dimensions.radius20),
+                            ),
+                            color: Colors.white30,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                left: Dimensions.width10,
+                                right: Dimensions.width10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                BigText(text: 'Nutrition fruit meal in china'),
+                                SizedBox(
+                                  height: Dimensions.height10,
+                                ),
+                                SmallText(text: 'With chinese characteristics'),
+                                SizedBox(
+                                  height: Dimensions.height10,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    IconTextWidget(
+                                        icon: Icons.circle_sharp,
+                                        text: 'Normal',
+                                        iconColor: AppColors.iconColor1),
+                                    IconTextWidget(
+                                        icon: Icons.location_on,
+                                        text: '1.7km',
+                                        iconColor: AppColors.mainColor),
+                                    IconTextWidget(
+                                        icon: Icons.access_time_rounded,
+                                        text: '32min',
+                                        iconColor: AppColors.iconColor2)
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              });
+        })
       ],
     );
   }

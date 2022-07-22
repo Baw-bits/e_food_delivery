@@ -1,17 +1,27 @@
 class Recommended {
-  int? totalSize;
-  int? typeId;
-  int? offset;
-  List<ProductModel>? products;
+  int? _totalSize;
+  int? _typeId;
+  int? _offset;
+  late List<ProductModel>? _products;
+  List<ProductModel>? get products => _products;
 
-  Recommended({this.totalSize, this.typeId, this.offset, this.products});
+  Recommended(
+      {required totalSize,
+      required typeId,
+      required offset,
+      required products}) {
+    this._totalSize = totalSize;
+    this._typeId = typeId;
+    this._offset = offset;
+    this._products = products;
+  }
 
   Recommended.fromJson(Map<String, dynamic> json) {
-    totalSize = json['total_size'];
-    typeId = json['type_id'];
-    offset = json['offset'];
+    _totalSize = json['total_size'];
+    _typeId = json['type_id'];
+    _offset = json['offset'];
     if (json['products'] != null) {
-      products = <ProductModel>[];
+      _products = <ProductModel>[];
       json['products'].forEach((v) {
         products!.add(new ProductModel.fromJson(v));
       });
