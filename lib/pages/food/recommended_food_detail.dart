@@ -5,6 +5,9 @@ import 'package:fmb/utils/dimensions.dart';
 import 'package:fmb/widgets/app_icon.dart';
 import 'package:fmb/widgets/big_text.dart';
 import 'package:fmb/widgets/expandable_text.dart';
+import 'package:get/get.dart';
+
+import '../../routes/route_helper.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
   const RecommendedFoodDetail({Key? key}) : super(key: key);
@@ -16,11 +19,16 @@ class RecommendedFoodDetail extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 70,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.clear),
+                GestureDetector(
+                    onTap: () {
+                      Get.toNamed(RouteHelper.getInitial());
+                    },
+                    child: AppIcon(icon: Icons.clear)),
                 AppIcon(icon: Icons.shopping_cart_checkout_outlined)
               ],
             ),
