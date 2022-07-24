@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fmb/controllers/recommended_product_controller.dart';
+import 'package:fmb/utils/app_constants.dart';
 import 'package:fmb/utils/colors.dart';
 import 'package:fmb/utils/dimensions.dart';
 import 'package:fmb/widgets/app_icon.dart';
@@ -10,10 +12,14 @@ import 'package:get/get.dart';
 import '../../routes/route_helper.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
-  const RecommendedFoodDetail({Key? key}) : super(key: key);
+  final int pageId;
+  const RecommendedFoodDetail({Key? key, required this.pageId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
@@ -38,7 +44,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                 child: Center(
                   child: BigText(
                     size: Dimensions.font20,
-                    text: 'Chinese Side',
+                    text: product.name!,
                   ),
                 ),
                 width: double.maxFinite,
@@ -54,8 +60,8 @@ class RecommendedFoodDetail extends StatelessWidget {
             backgroundColor: AppColors.yellowColor,
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                'assets/image/food0.png',
+              background: Image.network(
+                AppConstants.BASE_URL + AppConstants.UPLOADURL + product.img!,
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -68,9 +74,9 @@ class RecommendedFoodDetail extends StatelessWidget {
                   margin: EdgeInsets.only(
                       left: Dimensions.width20, right: Dimensions.width20),
                   child: ExpandableText(
-                      text:
-                          'mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmkdffsd uhjljjoiffdhfjhg ddfhlkjklm, msestrytyhijlmm,,mn,nmbmnbbnvnvcbvcvcbmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmkdffsd uhjljjoiffdhfjhg ddfhlkjklm, msestrytyhijlmm,,mn,nmbmnbbnvnvcbvcvcbmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmkdffsd uhjljjoiffdhfjhg ddfhlkjklm, msestrytyhijlmm,,mn,nmbmnbbnvnvcbvcvcbmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmkdffsd uhjljjoiffdhfjhg ddfhlkjklm, msestrytyhijlmm,,mn,nmbmnbbnvnvcbvcvcbmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmkdffsd uhjljjoiffdhfjhg ddfhlkjklm, msestrytyhijlmm,,mn,nmbmnbbnvnvcbvcvcbmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmkdffsd uhjljjoiffdhfjhg ddfhlkjklm, msestrytyhijlmm,,mn,nmbmnbbnvnvcbvcvcb'),
-                )
+                    text: product.description!,
+                  ),
+                ),
               ],
             ),
           )
@@ -86,6 +92,7 @@ class RecommendedFoodDetail extends StatelessWidget {
               top: Dimensions.height10,
               bottom: Dimensions.height10,
             ),
+            //price
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -95,7 +102,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                     backgroundColor: AppColors.mainColor,
                     icon: Icons.remove),
                 BigText(
-                  text: '\$12.88' + ' X' + ' 0',
+                  text: '\$${product.price!}  X' + ' 0',
                   color: AppColors.mainBlackColor,
                   size: Dimensions.font20,
                 ),
@@ -144,6 +151,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                       bottom: Dimensions.height20,
                       left: Dimensions.width20,
                       right: Dimensions.width20),
+                  //Add to cart
                   child: BigText(
                     text: '\$10 | Add to cart',
                     color: Colors.white,
