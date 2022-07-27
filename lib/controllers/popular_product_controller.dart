@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fmb/controllers/cart_controller.dart';
 import 'package:fmb/data/repositories/popular_product_repo.dart';
 import 'package:fmb/modules/popular_product_model.dart';
 import 'package:fmb/utils/colors.dart';
@@ -9,8 +10,11 @@ class PopularProductController extends GetxController {
   final PopularProductRepo popularProductRepo;
   PopularProductController({required this.popularProductRepo});
 
+  late CartController _cart;
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
+  int _cardItems = 0;
+  int get cardItems => _cardItems + _quantity;
   int _quantity = 0;
   int get quantity => _quantity;
   List<dynamic> _popularProductList = [];
@@ -50,7 +54,13 @@ class PopularProductController extends GetxController {
     }
   }
 
-  void initProduct() {
+  void initProduct(CartController cart) {
     _quantity = 0;
+    _cardItems = 0;
+    _cart = cart;
+  }
+
+  void addItem(ProductModel product) {
+    _cart.addItem(product, _quantity);
   }
 }
