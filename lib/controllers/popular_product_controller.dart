@@ -13,8 +13,8 @@ class PopularProductController extends GetxController {
   late CartController _cart;
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
-  int _cardItems = 0;
-  int get cardItems => _cardItems + _quantity;
+  int _inCardItems = 0;
+  int get inCardItems => _inCardItems + _quantity;
   int _quantity = 0;
   int get quantity => _quantity;
   List<dynamic> _popularProductList = [];
@@ -41,11 +41,11 @@ class PopularProductController extends GetxController {
   }
 
   int checkQuantity(int quantity) {
-    if (quantity < 0) {
+    if ((_inCardItems + quantity) < 0) {
       Get.snackbar('Item count', "You can't reduce more",
           backgroundColor: AppColors.mainColor, colorText: Colors.white);
       return 0;
-    } else if (quantity > 20) {
+    } else if ((_inCardItems + quantity) > 20) {
       Get.snackbar('Item count', "You can't add more",
           backgroundColor: AppColors.mainColor, colorText: Colors.white);
       return 20;
@@ -54,13 +54,34 @@ class PopularProductController extends GetxController {
     }
   }
 
-  void initProduct(CartController cart) {
+  void initProduct(ProductModel product, CartController cart) {
     _quantity = 0;
-    _cardItems = 0;
+    _inCardItems = 0;
     _cart = cart;
+    var exist = false;
+    exist = _cart.existInCart(product);
+    print('exist or not:' + exist.toString());
+    if (exist) {
+      _inCardItems = _cart.getQuantity(product);
+    }
+    print('the quantity in the cart is ' + _inCardItems.toString());
   }
 
   void addItem(ProductModel product) {
+
     _cart.addItem(product, _quantity);
+    _inCardItems = _cart.getQuantity(product);
+    _quantity = 0;
+    print(_quantity);
+    _cart.items.forEach((key, value) {
+      print('the id is ' +
+          value.id.toString() +
+          ' the quantity is ' +
+          value.quantity.toString());
+    });
+    // } else {
+    //   Get.snackbar('Item count', "You must Add 1 Item",
+    //       backgroundColor: AppColors.mainColor, colorText: Colors.white);
+    // }
   }
 }
