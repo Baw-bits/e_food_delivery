@@ -6,6 +6,8 @@ import 'package:fmb/modules/popular_product_model.dart';
 import 'package:fmb/utils/colors.dart';
 import 'package:get/get.dart';
 
+import '../modules/cart_model.dart';
+
 class PopularProductController extends GetxController {
   final PopularProductRepo popularProductRepo;
   PopularProductController({required this.popularProductRepo});
@@ -44,8 +46,13 @@ class PopularProductController extends GetxController {
     if ((_inCardItems + quantity) < 0) {
       Get.snackbar('Item count', "You can't reduce more",
           backgroundColor: AppColors.mainColor, colorText: Colors.white);
+      if(_inCardItems>0){
+        _quantity = -_inCardItems;
+        return _quantity;
+      }
       return 0;
-    } else if ((_inCardItems + quantity) > 20) {
+    }
+    else if ((_inCardItems + quantity) > 20) {
       Get.snackbar('Item count', "You can't add more",
           backgroundColor: AppColors.mainColor, colorText: Colors.white);
       return 20;
@@ -79,9 +86,12 @@ class PopularProductController extends GetxController {
           ' the quantity is ' +
           value.quantity.toString());
     });
-    // } else {
-    //   Get.snackbar('Item count', "You must Add 1 Item",
-    //       backgroundColor: AppColors.mainColor, colorText: Colors.white);
-    // }
+    update();
+  }
+  int get totalItems{
+    return _cart.totalItems;
+  }
+  List<CartModel> get getItems{
+    return _cart.getItems;
   }
 }
