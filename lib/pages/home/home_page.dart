@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fmb/auth/sign_up_page.dart';
+import 'package:fmb/pages/account/account_page.dart';
+import 'package:fmb/pages/cart/cart_history.dart';
 import 'package:fmb/pages/home/main_food_page.dart';
 import 'package:fmb/utils/colors.dart';
 
@@ -16,9 +19,9 @@ class _HomePageState extends State<HomePage> {
 
   List pages=[
     MainFoodPage(),
-    Container(child: Text('Next Page'),),
-    Container(child: Text('Next next next Page'),),
-    Container(child: Text('Next next next Page'),),
+    SignUpPage(),
+    CartHistory(),
+   AccountPage(),
   ];
 void onTapNav(int index){
   setState(() {
